@@ -60,4 +60,31 @@
   - Converts page title to snake case
   - Creates a notification element (commented out by default)
 - Set the script to run when the page DOM is fully loaded
-- Updated manifest.json to register the content script 
+- Updated manifest.json to register the content script
+
+## Enhanced Jira Ticket Copy Functionality
+
+### Updated manifest.json:
+- Added required permissions:
+  - `activeTab`: To access the current tab's content
+  - `clipboardWrite`: To write to the clipboard
+- Added host permissions for Atlassian domains
+- Set content script to run at `document_idle` for optimal performance
+
+### Enhanced content.js:
+- Specialized the content script for Jira ticket pages
+- Added ticket number extraction functionality:
+  - Primary method: Extract from breadcrumb element
+  - Fallback method: Extract from URL path
+- Improved copy button UI:
+  - Added Atlassian-style styling
+  - Added hover effects
+  - Added success/error feedback states
+- Implemented clipboard functionality:
+  - Copy ticket number to clipboard
+  - Show visual feedback on success/failure
+- Added MutationObserver to handle SPA navigation:
+  - Detects DOM changes when navigating between tickets
+  - Re-adds the copy button when needed
+- Improved initialization logic:
+  - Handles both loading and already-loaded DOM states 

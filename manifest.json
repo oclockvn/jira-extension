@@ -1,13 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "Blank Chrome Extension",
+  "name": "Quick Copy Ticket",
   "version": "1.0.0",
-  "description": "A blank Chrome extension using Manifest V3",
+  "description": "A Chrome extension to copy the current Jira ticket number to the clipboard",
   "action": {
     "default_popup": "popup.html"
   },
-  "permissions": [],
-  "host_permissions": [],
+  "permissions": [
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "*://*.atlassian.net/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
