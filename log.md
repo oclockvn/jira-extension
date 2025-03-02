@@ -47,4 +47,17 @@
   - Removing non-word characters
   - Cleaning up extra hyphens
 - Added JSDoc documentation with example usage
-- Exported the function for reuse in other files 
+- Exported the function for reuse in other files
+
+## Added Content Script
+
+### Created content.js:
+- Added a content script that runs on all web pages
+- Implemented page DOM manipulation capabilities
+- Copied the `toSnakeCase()` utility function directly into the content script
+  - This avoids ES module import issues in content scripts
+- Added example functionality:
+  - Converts page title to snake case
+  - Creates a notification element (commented out by default)
+- Set the script to run when the page DOM is fully loaded
+- Updated manifest.json to register the content script 
