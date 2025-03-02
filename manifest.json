@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Quick Copy Ticket",
+  "name": "Jira Quick Copy",
   "version": "1.0.0",
   "description": "A Chrome extension to copy the current Jira ticket number to the clipboard",
   "action": {

@@ -158,4 +158,14 @@
   - Reduced code duplication by ~50 lines
   - Maintained identical functionality and behavior
 - Added JSDoc documentation for the new generic function
-- Improved maintainability for future button additions 
+- Improved maintainability for future button additions
+
+## Added Feedback and Feature Request Section to Popup
+
+### Updated popup.html:
+- Added a new section for feedback and feature requests
+- Included a clear heading to draw attention to the section
+- Added a friendly message encouraging users to provide feedback
+- Included a mailto link with the specified email address (oclockvn@gmail.com)
+- Positioned the section strategically before the demo section
+- Maintained consistent styling with the rest of the popup interface 
