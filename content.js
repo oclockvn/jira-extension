@@ -31,9 +31,17 @@ const toSnakeCase = (s) => {
 }
 
 /**
- * Adds a copy button next to the Jira ticket breadcrumb
+ * Creates and adds a copy button with specified configuration
+ * 
+ * @param {Object} config - Button configuration
+ * @param {string} config.buttonText - Text to display on the button
+ * @param {string} config.buttonClass - Specific class for the button
+ * @param {Function} config.formatCopyText - Function that formats the text to copy
+ * @returns {void}
  */
-const addCopyButton = () => {
+const addCopyButtonGeneric = (config) => {
+  const { buttonText, buttonClass, formatCopyText } = config;
+  
   // If the jira link element doesn't exist, don't add the button
   const jiraLinkElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.breadcrumbs.current-issue.item"]');
   if (!jiraLinkElement) {
@@ -41,22 +49,25 @@ const addCopyButton = () => {
   }
 
   // If the button already exists, don't add it again
-  if (document.querySelector('.qp-copy-ticket-button')) {
+  if (document.querySelector(`.${buttonClass}`)) {
     return;
   }
 
   // Create the copy button
   const copyButton = document.createElement('button');
-  copyButton.textContent = 'COPY TICKET';
-  copyButton.classList.add('qp-button', 'qp-copy-ticket-button');
+  copyButton.textContent = buttonText;
+  copyButton.classList.add('qp-button', buttonClass);
 
-  // Add click handler to copy the ticket number
+  // Add click handler to copy the formatted text
   copyButton.addEventListener('click', () => {
     const titleElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]');
     const title = titleElement ? titleElement.textContent.trim() : '';
     const ticketNumber = jiraLinkElement.textContent.trim();
+    
     if (ticketNumber) {
-      navigator.clipboard.writeText(`[${ticketNumber}] ${title}`)
+      const textToCopy = formatCopyText(ticketNumber, title);
+      
+      navigator.clipboard.writeText(textToCopy)
         .then(() => {
           // Show success feedback
           const originalText = copyButton.textContent;
@@ -75,7 +86,7 @@ const addCopyButton = () => {
 
           // Reset after 1.5 seconds
           setTimeout(() => {
-            copyButton.textContent = 'COPY TICKET';
+            copyButton.textContent = buttonText;
             copyButton.classList.remove('error');
           }, 1500);
         });
@@ -86,57 +97,26 @@ const addCopyButton = () => {
   jiraLinkElement.parentElement.appendChild(copyButton);
 };
 
-const addCopyBranchButton = () => {
-  // If the jira link element doesn't exist, don't add the button
-  const jiraLinkElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.breadcrumbs.current-issue.item"]');
-  if (!jiraLinkElement) {
-    return;
-  }
-
-  // If the button already exists, don't add it again
-  if (document.querySelector('.qp-copy-branch-button')) {
-    return;
-  }
-
-  // Create the copy button
-  const copyButton = document.createElement('button');
-  copyButton.textContent = 'COPY BRANCH';
-  copyButton.classList.add('qp-button', 'qp-copy-branch-button');
-
-  // Add click handler to copy the ticket number
-  copyButton.addEventListener('click', () => {
-    const titleElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]');
-    const title = titleElement ? titleElement.textContent.trim() : '';
-    const ticketNumber = jiraLinkElement.textContent.trim();
-    if (ticketNumber) {
-      navigator.clipboard.writeText('feature/' + toSnakeCase(`${ticketNumber}-${title}`))
-        .then(() => {
-          // Show success feedback
-          const originalText = copyButton.textContent;
-          copyButton.textContent = 'COPIED!';
-          copyButton.classList.add('success');
-
-          // Reset after 1.5 seconds
-          setTimeout(() => {
-            copyButton.textContent = originalText;
-            copyButton.classList.remove('success');
-          }, 1500);
-        })
-        .catch(err => {
-          copyButton.textContent = 'ERROR!';
-          copyButton.classList.add('error');
-
-          // Reset after 1.5 seconds
-          setTimeout(() => {
-            copyButton.textContent = 'COPY BRANCH';
-            copyButton.classList.remove('error');
-          }, 1500);
-        });
-    }
+/**
+ * Adds a copy button for the ticket information
+ */
+const addCopyButton = () => {
+  addCopyButtonGeneric({
+    buttonText: 'COPY TICKET',
+    buttonClass: 'qp-copy-ticket-button',
+    formatCopyText: (ticketNumber, title) => `[${ticketNumber}] ${title}`
   });
+};
 
-  // Add the copy button next to the jira link element
-  jiraLinkElement.parentElement.appendChild(copyButton);
+/**
+ * Adds a copy button for the branch name
+ */
+const addCopyBranchButton = () => {
+  addCopyButtonGeneric({
+    buttonText: 'COPY BRANCH',
+    buttonClass: 'qp-copy-branch-button',
+    formatCopyText: (ticketNumber, title) => 'feature/' + toSnakeCase(`${ticketNumber}-${title}`)
+  });
 };
 
 /**

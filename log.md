@@ -144,4 +144,18 @@
 - Implemented a more maintainable CSS structure:
   - Common styles defined once
   - Button-specific styles for customization
-  - Adjusted spacing between buttons for better visual appearance 
+  - Adjusted spacing between buttons for better visual appearance
+
+## Refactored Button Creation Methods
+
+### Improved content.js:
+- Created a generic button creation function `addCopyButtonGeneric()` that:
+  - Takes a configuration object with button text, class, and formatting function
+  - Handles all the common functionality (DOM checks, button creation, event handling)
+  - Manages clipboard operations and feedback states
+- Refactored `addCopyButton()` and `addCopyBranchButton()` to use the generic function:
+  - Each function now only provides its specific configuration
+  - Reduced code duplication by ~50 lines
+  - Maintained identical functionality and behavior
+- Added JSDoc documentation for the new generic function
+- Improved maintainability for future button additions 
