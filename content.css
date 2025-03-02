@@ -1,0 +1,32 @@
+/**
+ * Styles for the content script elements
+ */
+
+/* Copy button styles */
+.qp-copy-ticket-button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  background-color: #0052CC;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover state */
+.qp-copy-ticket-button:hover {
+  background-color: #0065FF;
+}
+
+/* Success state */
+.qp-copy-ticket-button.success {
+  background-color: #00875A;
+}
+
+/* Error state */
+.qp-copy-ticket-button.error {
+  background-color: #DE350B;
+} 

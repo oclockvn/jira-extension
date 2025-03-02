@@ -87,4 +87,41 @@
   - Detects DOM changes when navigating between tickets
   - Re-adds the copy button when needed
 - Improved initialization logic:
-  - Handles both loading and already-loaded DOM states 
+  - Handles both loading and already-loaded DOM states
+
+## Enhanced Copy Format to Include Ticket Title
+
+### Updated content.js:
+- Added functionality to copy both ticket number and title
+- Created new helper functions:
+  - `getTicketInfo()`: Retrieves both ticket number and title using DOM selectors
+  - `formatTicketInfo()`: Formats the data in the pattern `[ticket-number] title`
+- Updated the copy button click handler to:
+  - Get both ticket number and title
+  - Format them according to the specified pattern
+  - Copy the formatted text to clipboard
+- Added better error handling for cases where title or ticket number might be missing
+- Improved logging for debugging purposes
+
+## Refactored Button Styling to CSS
+
+### Created content.css:
+- Extracted all button styles from content.js into a dedicated CSS file
+- Created styles for different button states:
+  - Default state
+  - Hover state
+  - Success state (when copying is successful)
+  - Error state (when copying fails)
+- Added smooth transition effect for state changes
+
+### Updated manifest.json:
+- Added content.css to the content_scripts section
+- Configured it to be injected alongside content.js
+
+### Refactored content.js:
+- Removed all inline styles from the button creation
+- Replaced style manipulation with CSS class toggling:
+  - Added 'success' class for successful copy operations
+  - Added 'error' class for failed copy operations
+- Simplified the code by leveraging CSS for styling concerns
+- Improved separation of concerns (JS for behavior, CSS for presentation) 

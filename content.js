@@ -22,24 +22,6 @@ const addCopyButton = () => {
   const copyButton = document.createElement('button');
   copyButton.textContent = 'COPY TICKET';
   copyButton.classList.add('qp-copy-ticket-button');
-  copyButton.style.marginLeft = '8px';
-  copyButton.style.padding = '4px 8px';
-  copyButton.style.backgroundColor = '#0052CC';
-  copyButton.style.color = 'white';
-  copyButton.style.border = 'none';
-  copyButton.style.borderRadius = '3px';
-  copyButton.style.cursor = 'pointer';
-  copyButton.style.fontSize = '12px';
-  copyButton.style.fontWeight = 'bold';
-
-  // Add hover effect
-  copyButton.addEventListener('mouseover', () => {
-    copyButton.style.backgroundColor = '#0065FF';
-  });
-
-  copyButton.addEventListener('mouseout', () => {
-    copyButton.style.backgroundColor = '#0052CC';
-  });
 
   // Add click handler to copy the ticket number
   copyButton.addEventListener('click', () => {
@@ -52,22 +34,22 @@ const addCopyButton = () => {
           // Show success feedback
           const originalText = copyButton.textContent;
           copyButton.textContent = 'COPIED!';
-          copyButton.style.backgroundColor = '#00875A'; // Success green
+          copyButton.classList.add('success');
 
           // Reset after 1.5 seconds
           setTimeout(() => {
             copyButton.textContent = originalText;
-            copyButton.style.backgroundColor = '#0052CC';
+            copyButton.classList.remove('success');
           }, 1500);
         })
         .catch(err => {
           copyButton.textContent = 'ERROR!';
-          copyButton.style.backgroundColor = '#DE350B'; // Error red
+          copyButton.classList.add('error');
 
           // Reset after 1.5 seconds
           setTimeout(() => {
             copyButton.textContent = 'COPY TICKET';
-            copyButton.style.backgroundColor = '#0052CC';
+            copyButton.classList.remove('error');
           }, 1500);
         });
     }
