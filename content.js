@@ -48,7 +48,7 @@ const addCopyButton = () => {
   // Create the copy button
   const copyButton = document.createElement('button');
   copyButton.textContent = 'COPY TICKET';
-  copyButton.classList.add('qp-copy-ticket-button');
+  copyButton.classList.add('qp-button', 'qp-copy-ticket-button');
 
   // Add click handler to copy the ticket number
   copyButton.addEventListener('click', () => {
@@ -101,7 +101,7 @@ const addCopyBranchButton = () => {
   // Create the copy button
   const copyButton = document.createElement('button');
   copyButton.textContent = 'COPY BRANCH';
-  copyButton.classList.add('qp-copy-branch-button');
+  copyButton.classList.add('qp-button', 'qp-copy-branch-button');
 
   // Add click handler to copy the ticket number
   copyButton.addEventListener('click', () => {
@@ -109,7 +109,7 @@ const addCopyBranchButton = () => {
     const title = titleElement ? titleElement.textContent.trim() : '';
     const ticketNumber = jiraLinkElement.textContent.trim();
     if (ticketNumber) {
-      navigator.clipboard.writeText('feature' + toSnakeCase(`${ticketNumber}-${title}`))
+      navigator.clipboard.writeText('feature/' + toSnakeCase(`${ticketNumber}-${title}`))
         .then(() => {
           // Show success feedback
           const originalText = copyButton.textContent;

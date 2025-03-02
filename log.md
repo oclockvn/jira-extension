@@ -124,4 +124,24 @@
   - Added 'success' class for successful copy operations
   - Added 'error' class for failed copy operations
 - Simplified the code by leveraging CSS for styling concerns
-- Improved separation of concerns (JS for behavior, CSS for presentation) 
+- Improved separation of concerns (JS for behavior, CSS for presentation)
+
+## Added Branch Name Copy Functionality and Improved CSS Structure
+
+### Enhanced content.js:
+- Added a second button for copying branch names
+- Implemented `addCopyBranchButton()` function to:
+  - Create a "COPY BRANCH" button
+  - Format ticket info as a Git branch name using the `toSnakeCase()` function
+  - Add proper prefix ('feature/') to branch names
+- Updated the MutationObserver to handle both buttons
+
+### Improved CSS Structure:
+- Refactored CSS to use a common base class (`qp-button`) for shared styles
+- Maintained specific classes for each button type:
+  - `qp-copy-ticket-button` for the ticket copy button
+  - `qp-copy-branch-button` for the branch name copy button
+- Implemented a more maintainable CSS structure:
+  - Common styles defined once
+  - Button-specific styles for customization
+  - Adjusted spacing between buttons for better visual appearance 

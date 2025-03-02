@@ -2,8 +2,8 @@
  * Styles for the content script elements
  */
 
-/* Copy button styles */
-.qp-copy-ticket-button {
+/* Common button styles */
+.qp-button {
   margin-left: 8px;
   padding: 4px 8px;
   background-color: #0052CC;
@@ -17,16 +17,26 @@
 }
 
 /* Hover state */
-.qp-copy-ticket-button:hover {
+.qp-button:hover {
   background-color: #0065FF;
 }
 
 /* Success state */
-.qp-copy-ticket-button.success {
+.qp-button.success {
   background-color: #00875A;
 }
 
 /* Error state */
-.qp-copy-ticket-button.error {
+.qp-button.error {
   background-color: #DE350B;
+}
+
+/* Specific button styles - can be used for customization if needed */
+.qp-copy-ticket-button {
+  /* Currently using common styles */
+}
+
+.qp-copy-branch-button {
+  /* Currently using common styles */
+  margin-left: 4px; /* Smaller margin between buttons */
 } 
