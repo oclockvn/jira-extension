@@ -63,9 +63,21 @@ const addCopyButtonGeneric = (config) => {
     const titleElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]');
     const title = titleElement ? titleElement.textContent.trim() : '';
     const ticketNumber = jiraLinkElement.textContent.trim();
+    let prefix = '';
+
+    // if copy branch button, add feature/ to the text
+    if (buttonClass === 'qp-copy-branch-button') {
+      const storyTypeElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.change-issue-type.button"]');
+      const storyType = storyTypeElement ? storyTypeElement.getAttribute('aria-label').trim().toLowerCase() : '';
+      if (storyType.startsWith('bug')) {
+        prefix = 'bugfix/';
+      } else {
+        prefix = 'feature/';
+      }
+    }
     
     if (ticketNumber) {
-      const textToCopy = formatCopyText(ticketNumber, title);
+      const textToCopy = prefix + formatCopyText(ticketNumber, title);
       
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -115,7 +127,7 @@ const addCopyBranchButton = () => {
   addCopyButtonGeneric({
     buttonText: 'COPY BRANCH',
     buttonClass: 'qp-copy-branch-button',
-    formatCopyText: (ticketNumber, title) => 'feature/' + toSnakeCase(`${ticketNumber}-${title}`)
+    formatCopyText: (ticketNumber, title) => toSnakeCase(`${ticketNumber}-${title}`)
   });
 };
 
