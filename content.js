@@ -43,9 +43,11 @@ const addCopyButton = () => {
 
   // Add click handler to copy the ticket number
   copyButton.addEventListener('click', () => {
+    const titleElement = document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]');
+    const title = titleElement ? titleElement.textContent.trim() : '';
     const ticketNumber = jiraLinkElement.textContent.trim();
     if (ticketNumber) {
-      navigator.clipboard.writeText(ticketNumber)
+      navigator.clipboard.writeText(`[${ticketNumber}] ${title}`)
         .then(() => {
           // Show success feedback
           const originalText = copyButton.textContent;
