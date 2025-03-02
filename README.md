@@ -7,6 +7,7 @@ A minimal Chrome extension template using Manifest V3.
 - Basic extension structure following Chrome's Manifest V3 requirements
 - Popup interface with HTML, CSS, and JavaScript
 - Background service worker
+- Utility functions for common tasks
 
 ## Installation
 
@@ -22,6 +23,8 @@ A minimal Chrome extension template using Manifest V3.
 - `popup.css`: Styles for the popup
 - `popup.js`: JavaScript for the popup functionality
 - `background.js`: Background service worker script
+- `util.js`: Utility functions for reuse across the extension
+  - `toSnakeCase()`: Converts strings to snake-case format
 
 ## Development
 

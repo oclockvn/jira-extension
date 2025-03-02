@@ -35,4 +35,16 @@
 - Created a minimal but complete extension structure
 - Followed Chrome's Manifest V3 requirements
 - Omitted image files as requested
-- Kept the code simple and well-commented for easy customization 
+- Kept the code simple and well-commented for easy customization
+
+## Added Utility Functions
+
+### Created util.js:
+- Added `toSnakeCase()` function to convert strings to snake-case format
+- Function handles:
+  - Converting text to lowercase
+  - Replacing spaces with hyphens
+  - Removing non-word characters
+  - Cleaning up extra hyphens
+- Added JSDoc documentation with example usage
+- Exported the function for reuse in other files 
